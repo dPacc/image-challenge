@@ -1,0 +1,49 @@
+version: "3"
+
+networks:
+  image-challenge-network:
+    driver: bridge
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8002:8002"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - image-challenge-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3002:3000"
+    networks:
+      - image-challenge-network
+
+  adminer:
+    image: adminer
+    ports:
+      - "8082:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - image-challenge-network
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: image_data
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - image-challenge-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

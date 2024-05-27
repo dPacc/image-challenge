@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# AIQ: Image Challenge Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend of the image data processing and visualization application provides a user interface to upload CSV files and view the processed image frames. It is built using React and utilizes Ant Design components for the user interface.
 
-## Available Scripts
+Frontend Structure
+------------------
 
-In the project directory, you can run:
+The frontend directory is organized as follows:
 
-### `npm start`
+* `src/`: Contains the source code for the frontend.
+  * `components/`: Contains reusable React components.
+    * `UploadCSV.js`: Implements the CSV file upload functionality.
+    * `FrameList.js`: Displays the list of processed image frames.
+  * `App.js`: The main component that sets up the routing and layout of the application.
+  * `App.css`: Contains CSS styles specific to the frontend.
+  * `index.js`: The entry point of the frontend application.
+* `public/`: Contains the public assets and the HTML template.
+* `package.json`: Lists the dependencies and scripts for the frontend.
+* `Dockerfile`: Defines the Docker image for the frontend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+User Interface
+--------------
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The frontend provides a user-friendly interface with the following components:
 
-### `npm test`
+* Upload CSV: Allows users to upload a CSV file containing image data. The CSV file is sent to the backend for processing.
+* Frame List: Displays a list of processed image frames based on the specified depth range. Users can input the minimum and maximum depth values to filter the frames.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The frontend communicates with the backend API to upload CSV files and retrieve processed image frames. It sends requests to the appropriate API endpoints and handles the responses to update the user interface accordingly.
 
-### `npm run build`
+Styling and UI Components
+-------------------------
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The frontend uses Ant Design, a popular React UI library, for styling and pre-built UI components. The Ant Design components provide a consistent and visually appealing user interface.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Routing
+-------
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The frontend uses React Router for handling navigation between different pages. The main routes are defined in the `App.js` component:
 
-### `npm run eject`
+* `/`: The home page that displays the CSV file upload component.
+* `/frames`: The page that displays the list of processed image frames.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Containerization
+----------------
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The frontend is containerized using Docker. The `Dockerfile` in the frontend directory defines the Docker image for the frontend. It sets up the necessary dependencies, copies the application code, and specifies the command to run the frontend development server.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Running the Frontend
+--------------------
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run the frontend locally, make sure you have Node.js and the required dependencies installed. Then, follow these steps:
 
-## Learn More
+1. Navigate to the `frontend` directory.
+2. Install the dependencies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```
+    npm install
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Run the frontend development server:
 
-### Code Splitting
+    ```
+    npm start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    The frontend will start running at `http://localhost:3000`.
 
-### Analyzing the Bundle Size
+Alternatively, you can run the frontend using Docker Compose as described in the project root directory's README.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Deployment
+----------
 
-### Making a Progressive Web App
+To deploy the frontend for production, you can build the optimized production-ready version of the frontend using the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+npm run build
+```
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This will generate a `build` directory containing the production-ready files. You can then serve the contents of the `build` directory using a static file server or deploy it to a hosting platform of your choice.

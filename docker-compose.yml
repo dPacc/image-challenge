@@ -1,9 +1,7 @@
 version: "3"
-
 networks:
   image-challenge-network:
     driver: bridge
-
 services:
   backend:
     build: ./backend

@@ -13,7 +13,7 @@ const FrameList = () => {
       setLoading(true);
       try {
         const result = await axios.get(
-          `http://localhost:8002/frames?depth_min=${depthMin}&depth_max=${depthMax}`
+          `${process.env.REACT_APP_API_URL}/frames?depth_min=${depthMin}&depth_max=${depthMax}`
         );
         setFrames(result.data.frames);
       } catch (error) {

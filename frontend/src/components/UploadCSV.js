@@ -13,7 +13,7 @@ const UploadCSV = () => {
     formData.append("file", file);
     setUploading(true);
     try {
-      await axios.post("http://localhost:8002/upload", formData);
+      await axios.post(`${process.env.REACT_APP_API_URL}/upload`, formData);
       message.success("CSV file uploaded successfully");
     } catch (error) {
       message.error("Failed to upload CSV file");

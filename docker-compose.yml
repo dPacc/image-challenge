@@ -1,8 +1,12 @@
 version: "3"
+
+# Define the network used by all services in this setup
 networks:
   image-challenge-network:
     driver: bridge
+
 services:
+  # Backend service configuration
   backend:
     build: ./backend
     ports:
@@ -18,6 +22,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: db
 
+  # Frontend service configuration
   frontend:
     build: ./frontend
     ports:
@@ -25,8 +30,10 @@ services:
     networks:
       - image-challenge-network
     environment:
-      REACT_APP_API_URL: "http://nginx/image-api"
+      # URL to the backend service (http://nginx/.. in prod)
+      REACT_APP_API_URL: "http://localhost:8002"
 
+  # Adminer (Database management interface)
   adminer:
     image: adminer
     ports:
@@ -37,18 +44,26 @@ services:
     networks:
       - image-challenge-network
 
+  # Database service configuration
   db:
     image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: image_data
+    # Mounts the named volume 'pgdata' at the required path
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     networks:
       - image-challenge-network
     healthcheck:
+      # Health check to ensure DB is ready
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
+
+# Volumes section for defining persistent storage
+# Named volume 'pgdata' used for storing PostgreSQL data persistently
+volumes:
+  pgdata:

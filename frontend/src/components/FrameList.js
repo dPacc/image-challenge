@@ -34,10 +34,12 @@ const FrameList = () => {
             <span style={{ marginRight: 8 }}>Depth Min:</span>{" "}
             {/* Label for Min Depth */}
             <Input
+              type="number"
+              step="0.1"
               placeholder="9000.1"
               value={depthMin}
               onChange={(e) => setDepthMin(parseFloat(e.target.value))}
-              style={{ width: 120, marginRight: 16 }} // Added right margin
+              style={{ width: 120, marginRight: 16 }}
             />
           </div>
         </Col>
@@ -46,6 +48,8 @@ const FrameList = () => {
             <span style={{ marginRight: 8 }}>Depth Max:</span>{" "}
             {/* Label for Max Depth */}
             <Input
+              type="number"
+              step="0.1"
               placeholder="9000.4"
               value={depthMax}
               onChange={(e) => setDepthMax(parseFloat(e.target.value))}

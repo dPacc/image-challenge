@@ -9,9 +9,12 @@ def resize_image(image_data, width=150):
     return resized_data
 
 def apply_color_map(image_data, cmap='viridis'):
-    plt.imshow(image_data, cmap=cmap)
-    plt.axis('off')
+    fig, ax = plt.subplots(figsize=(1.5, 1.5))  # Adjust the figure size as needed
+    ax.imshow(image_data, cmap=cmap)
+    ax.axis('off')
+    ax.set_position([0, 0, 1, 1])  # Remove padding around the image
     buffer = BytesIO()
-    plt.savefig(buffer, format='png', bbox_inches='tight', pad_inches=0)
+    fig.savefig(buffer, format='png', bbox_inches='tight', pad_inches=0)
     buffer.seek(0)
+    plt.close(fig)  # Close the figure to free up memory
     return buffer.getvalue()
